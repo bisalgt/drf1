@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # third party packages
     'rest_framework',
+    'rest_framework.authtoken',
 
 
     # custom apis

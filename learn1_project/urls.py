@@ -20,3 +20,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apis.quiz.urls')),
 ]
+
+from rest_framework.authtoken import views
+urlpatterns += [
+    path('api-token-auth', views.obtain_auth_token)
+]
