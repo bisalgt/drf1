@@ -7,6 +7,8 @@ from rest_framework.parsers import JSONParser
 from rest_framework.authtoken.models import Token
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from rest_framework.views import APIView
+
 # to convert bytes of string to json we need to import io
 import io
 
@@ -80,3 +82,19 @@ def home(request):
 		'data': request.data
 		}
 	return Response(content)
+
+
+
+
+
+class HomeView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    throttle_classes = [UserRateThrottle]
+
+    def get(self, request, format=None):
+        content = {
+            'user': "bishal",  # `django.contrib.auth.User` instance.
+            'auth': "Fully Authorized"  # None
+        }
+        return Response(content)

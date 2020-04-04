@@ -143,7 +143,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_THROTTLE_RATES': {
         'anon': '100/day',
-        'user': '5000/day'
+        'user': '5/day'
     },
     # 'DEFAULT_PERMISSION_CLASSES': [
     #     'rest_framework.permissions.IsAuthenticated',
