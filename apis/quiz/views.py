@@ -118,3 +118,13 @@ class HomeView(APIView):
             'auth': "Fully Authorized"  # None
         }
         return Response(content)
+
+
+
+@api_view(['GET', 'POST'])
+def about(request):
+	content = {
+	'name': 'Bishal',
+	'position': 'MultiMillonaire'
+	}
+	return content
