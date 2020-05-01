@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     # custom apis
     'apis.quiz',
+    'apis.learnviews',
 
 ]
 

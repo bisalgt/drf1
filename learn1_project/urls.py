@@ -19,6 +19,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apis.quiz.urls')),
+    path('learnviews/', include('apis.learnviews.urls')),
 ]
 
 # from rest_framework.authtoken import views
