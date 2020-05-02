@@ -4,8 +4,69 @@ from rest_framework.decorators import api_view, authentication_classes, throttle
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 
+from rest_framework.decorators import api_view, schema
+from rest_framework.schemas import AutoSchema
+from rest_framework.generics import \
+    CreateAPIView, \
+    ListAPIView, \
+    RetrieveAPIView, \
+    UpdateAPIView, \
+    DestroyAPIView, \
+    ListCreateAPIView, \
+    RetrieveUpdateDestroyAPIView, \
+    RetrieveDestroyAPIView, \
+    RetrieveUpdateAPIView
+
+
 from apis.learnviews.models import Room
 from apis.learnviews.serializers import RoomSerializer
+
+
+class RoomCreateView(CreateAPIView):
+    serializer_class = RoomSerializer
+    
+class RoomListView(ListAPIView):
+    serializer_class = RoomSerializer
+    def get_queryset(self):
+        return Room.objects.all()
+
+class RoomRetrieveView(RetrieveAPIView):
+    print('inside here')
+    serializer_class = RoomSerializer
+    lookup_field = 'pk'
+    # lookup_url_kwarg = 'title'
+    queryset = Room.objects.all()
+
+class RoomUpdateView(UpdateAPIView):
+    serializer_class = RoomSerializer
+    queryset = Room.objects.all()
+    lookup_field = 'pk'
+
+class RoomDestroyView(DestroyAPIView):
+    serializer_class = RoomSerializer
+    queryset = Room.objects.all()
+
+class RoomListCreateView(ListCreateAPIView):
+    serializer_class = RoomSerializer
+    queryset = Room.objects.all()
+
+
+class RoomRetrieveUpdateView(RetrieveUpdateAPIView):
+    serializer_class = RoomSerializer
+    queryset = Room.objects.all()
+
+
+class RoomRetrieveDestroyView(RetrieveDestroyAPIView):
+    serializer_class = RoomSerializer
+    queryset = Room.objects.all()
+
+
+
+
+class RoomRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    serializer_class = RoomSerializer
+    queryset = Room.objects.all()
+
 
 
 class CustomThrottleUser(UserRateThrottle):
@@ -81,3 +142,9 @@ def room_update(request):
             return Response(serializer.data)
     return Response(data=serializer.data)
     
+
+
+@api_view(['GET'])
+@schema(AutoSchema())
+def schema_view(request):
+    return Response({"message": "Hello for today! See you tomorrow!"})
