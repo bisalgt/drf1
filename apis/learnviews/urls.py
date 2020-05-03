@@ -33,3 +33,26 @@ urlpatterns = [
     path('schema_view/', schema_view, name='schema_view'),
     
 ]
+
+
+
+from apis.learnviews.viewsets import \
+    RoomViewSet, RommModelViewSet
+from rest_framework.routers import DefaultRouter
+
+
+router = DefaultRouter()
+router.register('room_router', RoomViewSet, basename='room_router')
+router.register('room_modelviewset', RommModelViewSet)
+
+
+urlpatterns = router.urls
+
+
+
+
+urlpatterns += [
+    path('room_list/', RoomViewSet.as_view({'get': 'list'})),
+    path('room_retrieve/<int:pk>/', RoomViewSet.as_view({'get': 'retrieve'})),
+]
+    
