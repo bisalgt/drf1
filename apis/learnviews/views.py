@@ -148,3 +148,17 @@ def room_update(request):
 @schema(AutoSchema())
 def schema_view(request):
     return Response({"message": "Hello for today! See you tomorrow!"})
+
+
+from apis.learnviews.serializers import CommentSerializer, Comment
+
+@api_view(['GET', 'POST', 'PATCH', 'PUT'])
+def comment_view(request):
+    if request.method=='GET':
+        comment = CommentSerializer(data=request.data)
+        return Response(comment.initial_data)
+    elif request.method=='POST':
+        comment = CommentSerializer(data=request.data)
+        if comment.is_valid():
+            comment.save()
+        return Response(comment.data)

@@ -37,13 +37,15 @@ urlpatterns = [
 
 
 from apis.learnviews.viewsets import \
-    RoomViewSet, RommModelViewSet
+    RoomViewSet, RommModelViewSet, RommModelViewSetRouter
 from rest_framework.routers import DefaultRouter
 
+from apis.learnviews import routerfile
 
 router = DefaultRouter()
 router.register('room_router', RoomViewSet, basename='room_router')
 router.register('room_modelviewset', RommModelViewSet)
+router.register('room_router_set', RommModelViewSetRouter, basename='room-router-set')
 
 
 urlpatterns = router.urls
@@ -56,3 +58,11 @@ urlpatterns += [
     path('room_retrieve/<int:pk>/', RoomViewSet.as_view({'get': 'retrieve'})),
 ]
     
+
+from apis.learnviews.views import comment_view
+
+urlpatterns += [
+    path('comment/', comment_view),
+]
+
+

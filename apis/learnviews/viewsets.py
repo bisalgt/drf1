@@ -36,5 +36,14 @@ class RommModelViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
+class RommModelViewSetRouter(viewsets.ModelViewSet):
+    serializer_class = RoomSerializer
+    lookup_field = 'title'
+    throttle_classes = []
+    # 
+    # queryset = Room.objects.all()
 
+# Not using query set asks for basename not set for url names, we need to declare basename at routers for this problem
+    def get_queryset(self):
+        return Room.objects.all()
 
